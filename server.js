@@ -5,7 +5,7 @@ const inert = require('inert');
 const good = require('good');
 
 const server = new hapi.Server();
-server.connection({port: 8000});
+server.connection({port: 5000});
 server.register(inert);
 server.register({
     register: good,
