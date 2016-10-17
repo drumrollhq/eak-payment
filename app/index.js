@@ -1,9 +1,12 @@
 import React from 'react';
 import {render} from 'react-dom';
+const Form = require('./components/form');
 
 class App extends React.Component {
     render () {
-        return <p> Hello React!</p>;
+        return (
+            <Form />
+        );
     }
 }
 
