@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +22,8 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
-    "node-notifier": "^4.6.1"
+    "html-webpack-plugin": "^2.22.0",
+    "node-notifier": "^4.6.1",
+    "webpack": "^1.13.2"
   }
 }
