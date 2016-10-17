@@ -15,6 +15,19 @@ module.exports = {
         filename: '[name].js'
     },
     plugins: [
-        new HtmlWebpackPlugin()
-    ]
+        new HtmlWebpackPlugin({
+            template: require('html-webpack-template'),
+            inject: false,
+            appMountId: 'app'
+        })
+    ],
+    module : {
+        loaders : [
+            {
+                test : /\.js$/,
+                exclude: /node_modules/,
+                loader : 'babel'
+            }
+        ]
+    }
 };
