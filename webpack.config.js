@@ -8,6 +8,7 @@ const minify = require('./src/webpack/minify');
 const freeVariables = require('./src/webpack/free-variables');
 const extractBundle = require('./src/webpack/extract-bundle');
 const clean = require('./src/webpack/clean');
+const extractCSS = require('./src/webpack/extract-sass');
 
 
 const PATHS = {
@@ -69,7 +70,7 @@ switch(process.env.npm_lifecycle_event)
                 entries: ['react']
             }),
             minify(),
-            sass(PATHS.app)
+            extractCSS(PATHS.app)
         );
         break;
     default:
