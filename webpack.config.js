@@ -51,12 +51,18 @@ switch(process.env.npm_lifecycle_event)
     case 'build':
         config = merge(
             common,
+            {
+                devtool: 'source-map',
+            },
             sass(PATHS.app)
         );
         break;
     default:
         config = merge(
             common,
+            {
+                devtool: 'eval-source-map'
+            },
             sass(PATHS.app),
             devServer({
                 host: process.env.HOST || 'localhost',

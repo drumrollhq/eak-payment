@@ -4,7 +4,7 @@ module.exports = function(paths) {
             loaders: [
                 {
                     test: /\.scss$/,
-                    loaders: ['style', 'css', 'sass'],
+                    loaders: ['style?sourceMap', 'css?sourceMap', 'sass?sourceMap'],
                     include: paths
                 }
             ]
