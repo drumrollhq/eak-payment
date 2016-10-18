@@ -64,7 +64,7 @@ server.route({
             }
         });
 
-        return reply.file('./views/confirmation.html');
+        return reply.file('./src/confirmation.html');
 
     }
 });

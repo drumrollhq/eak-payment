@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
-    app: path.join(__dirname, 'app'),
+    app: path.join(__dirname, 'src'),
     build: path.join(__dirname, 'build', 'dist')
 };
 
@@ -18,7 +18,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: require('html-webpack-template'),
             inject: false,
-            appMountId: 'app'
+            appMountId: 'app',
+            links: [
+                'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
+            ],
+            scripts: [
+                'https://code.jquery.com/jquery-3.1.1.min.js',
+                'https://js.stripe.com/v2/'
+            ]
         })
     ],
     module : {
