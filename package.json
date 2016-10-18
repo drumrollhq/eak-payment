@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "webpack -p"
+    "heroku-postbuild": "webpack"
   },
   "keywords": [],
   "author": "",
