@@ -1,12 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const validate = require('webpack-validator');
+const devServer = require('./src/webpack/dev-server');
+
 
 const PATHS = {
     app: path.join(__dirname, 'src'),
     build: path.join(__dirname, 'build', 'dist')
 };
 
-module.exports = {
+const common = {
     entry: {
         app: PATHS.app
     },
@@ -38,3 +42,22 @@ module.exports = {
         ]
     }
 };
+
+let config;
+
+switch(process.env.npm_lifecycle_event)
+{
+    case 'build':
+        config = merge(common, {});
+        break;
+    default:
+        config = merge(
+            common,
+            devServer({
+                host: process.env.HOST || 'localhost',
+                port: process.env.PORT || 8000
+            })
+        );
+}
+
+module.exports = validate(config);
