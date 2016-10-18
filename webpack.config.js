@@ -4,6 +4,9 @@ const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const devServer = require('./src/webpack/dev-server');
 const sass = require('./src/webpack/sass');
+const minify = require('./src/webpack/minify');
+const freeVariables = require('./src/webpack/free-variables');
+const extractBundle = require('./src/webpack/extract-bundle');
 
 
 const PATHS = {
@@ -14,10 +17,6 @@ const PATHS = {
 const common = {
     entry: {
         app: PATHS.app
-    },
-    output: {
-        path: PATHS.build,
-        filename: '[name].js'
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -53,7 +52,22 @@ switch(process.env.npm_lifecycle_event)
             common,
             {
                 devtool: 'source-map',
+                output: {
+                    path: PATHS.build,
+                    filename: '[name].[chunkhash].js',
+                    chunkFilename: '[chunkhash].js'
+                }
             },
+
+            freeVariables(
+                'process.env.NODE_ENV',
+                'production'
+            ),
+            extractBundle({
+                name: 'vendor',
+                entries: ['react']
+            }),
+            minify(),
             sass(PATHS.app)
         );
         break;
