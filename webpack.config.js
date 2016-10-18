@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const devServer = require('./src/webpack/dev-server');
+const sass = require('./src/webpack/sass');
 
 
 const PATHS = {
@@ -48,11 +49,15 @@ let config;
 switch(process.env.npm_lifecycle_event)
 {
     case 'build':
-        config = merge(common, {});
+        config = merge(
+            common,
+            sass(PATHS.app)
+        );
         break;
     default:
         config = merge(
             common,
+            sass(PATHS.app),
             devServer({
                 host: process.env.HOST || 'localhost',
                 port: process.env.PORT || 8000
