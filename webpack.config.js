@@ -7,6 +7,7 @@ const sass = require('./src/webpack/sass');
 const minify = require('./src/webpack/minify');
 const freeVariables = require('./src/webpack/free-variables');
 const extractBundle = require('./src/webpack/extract-bundle');
+const clean = require('./src/webpack/clean');
 
 
 const PATHS = {
@@ -58,7 +59,7 @@ switch(process.env.npm_lifecycle_event)
                     chunkFilename: '[chunkhash].js'
                 }
             },
-
+            clean(PATHS.build),
             freeVariables(
                 'process.env.NODE_ENV',
                 'production'
