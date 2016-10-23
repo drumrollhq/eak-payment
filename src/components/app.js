@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Form from './form';
+import Form from './user-form';
+import Selection from './selection';
 import './app.scss';
 
 export default class App extends React.Component
@@ -14,6 +15,8 @@ export default class App extends React.Component
                     <div className="jumbotron">
                         <h1>EAK - Payment Demo</h1>
                     </div>
+
+                    <Selection />
 
                     <Form />
 
