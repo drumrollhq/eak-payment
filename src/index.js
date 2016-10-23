@@ -1,15 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-const Form = require('./components/form');
-require('./components/form.scss');
 
-class App extends React.Component {
-    render () {
-        return (
-            <Form />
-        );
-    }
-}
+import App from './components/app';
 
 render(<App/>, document.getElementById('app'));
 
