@@ -9,7 +9,7 @@ module.exports = function(paths) {
                 // Extract CSS during build
                 {
                     test: /\.scss$/,
-                    loader: ExtractTextPlugin.extract('style', 'css', 'sass'),
+                    loader: ExtractTextPlugin.extract('style??sourceMap', 'css?sourceMap!sass?sourceMap'),
                     include: paths
                 }
             ]

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Selection from './selection';
-import UserForm from './user-form';
 import './app.scss';
 
 export default class App extends React.Component
@@ -18,7 +17,7 @@ export default class App extends React.Component
 
                     <Selection />
 
-                    <UserForm />
+                    {this.props.children}
 
                 </div>
 

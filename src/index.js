@@ -1,9 +1,19 @@
 import React from 'react';
 import {render} from 'react-dom';
+import {Router, Route, browserHistory} from 'react-router'
 
 import App from './components/app';
+import UserForm from './components/user-form';
+import SchoolsForm from './components/schools-form';
 
-render(<App/>, document.getElementById('app'));
+render((
+    <Router history={browserHistory}>
+        <Route path="/" component={App}>
+            <Route path="/home" component={UserForm}/>
+            <Route path="/schools" component={SchoolsForm}/>
+        </Route>
+    </Router>
+), document.getElementById('app'));
 
 function stripeResponseHandler(status, response) {
     // Grab the form:

@@ -16,14 +16,9 @@
         background: #eee;
         color: #fff;
         text-decoration: none;
-    }
-
-}
-
-.selection__item--active {
-
-    a {
-        background: #bbb;
+        &.active {
+            background: #bbb;
+        }
     }
 
 }
