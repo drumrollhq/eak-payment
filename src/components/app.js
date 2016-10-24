@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router'
 
 import Selection from './selection';
 import './app.scss';
@@ -18,6 +19,10 @@ export default class App extends React.Component
                     {'/referrals' !== this.props.location.pathname ? <Selection /> : null}
 
                     {this.props.children}
+
+                    <footer className="col-md-12">
+                        <Link to="/referrals" activeClassName="active">Referrals</Link>
+                    </footer>
 
                 </div>
 
