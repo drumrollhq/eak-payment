@@ -8,11 +8,17 @@ export default class UserForm extends React.Component
 
             <div>
 
-                <div className="col-md-6">
-                    <p>Blurb to go here.</p>
+                <div className="col-md-6 col-sm-6">
+                    <h2>E.A.K. for Parents</h2>
+                    <p>Help prepare your child for their future</p>
+                    <p>E.A.K. is a revolutionary way to inspire kids to code. This brand new Mario-style game introduces
+                        real coding languages, encouraging both girls and boys aged 8+ to become creators, rather than
+                        consumers of technology. You can even spend quality time playing and learning to code alongside
+                        your child, since E.A.K. is for beginners (and technophobes!) of any age.</p>
+                    <p>£4 / child / year</p>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 col-sm-6">
 
                     <div className="alert alert-danger payment-errors hide" role="alert">
                     </div>
@@ -43,7 +49,7 @@ export default class UserForm extends React.Component
                             <input type="text" className="form-control" data-stripe="address_zip" placeholder="12345" />
                         </div>
 
-                        <button type="submit" className="btn btn-default">Submit</button>
+                        <button type="submit" className="cta">Submit</button>
 
                     </form>
 

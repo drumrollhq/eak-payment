@@ -12,17 +12,7 @@ export default class App extends React.Component
 
                 <div className="row">
 
-                    <div className="jumbotron">
-                        <h1>EAK - Payment Demo</h1>
-                    </div>
-
-                    {'/referrals' !== this.props.location.pathname ? <Selection /> : null}
-
                     {this.props.children}
-
-                    <footer className="col-md-12">
-                        <Link to="/referrals" activeClassName="active">Referrals</Link>
-                    </footer>
 
                 </div>
 
