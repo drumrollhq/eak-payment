@@ -4,12 +4,16 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 import App from './components/app';
 import UserForm from './components/user-form';
+import RegisterForm from './components/register-form';
+import OptionsForm from './components/options-form';
 import ReferralsForm from './components/referrals-form';
 
 render((
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <IndexRoute component={UserForm} />
+            <IndexRoute component={RegisterForm} />
+            <Route path="/buy" component={UserForm}/>
+            <Route path="/options" component={OptionsForm}/>
             <Route path="/referrals" component={ReferralsForm}/>
         </Route>
     </Router>
