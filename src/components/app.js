@@ -15,7 +15,7 @@ export default class App extends React.Component
                         <h1>EAK - Payment Demo</h1>
                     </div>
 
-                    <Selection />
+                    {'/referrals' !== this.props.location.pathname ? <Selection /> : null}
 
                     {this.props.children}
 

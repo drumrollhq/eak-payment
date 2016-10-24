@@ -5,12 +5,14 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import App from './components/app';
 import UserForm from './components/user-form';
 import SchoolsForm from './components/schools-form';
+import ReferalForm from './components/referrals-form';
 
 render((
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={UserForm} />
             <Route path="/schools" component={SchoolsForm}/>
+            <Route path="/referrals" component={ReferalForm}/>
         </Route>
     </Router>
 ), document.getElementById('app'));
