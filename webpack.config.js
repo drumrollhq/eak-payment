@@ -51,7 +51,6 @@ let config;
 switch(process.env.npm_lifecycle_event)
 {
     case 'build':
-    case 'postinstall':
         config = merge(
             common,
             {
