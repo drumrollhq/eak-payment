@@ -5,12 +5,14 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import requireLogin from './lib/requireLogin';
 
 import App from './components/app';
+
 import UserForm from './components/user-form';
 import RegisterForm from './components/register-form';
 import OptionsForm from './components/options-form';
 import ReferralsForm from './components/referrals-form';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import Confirmation from './components/Confirmation';
 
 render((
     <Router history={browserHistory}>
@@ -21,6 +23,7 @@ render((
             <Route path="/referrals" component={ReferralsForm}/>
             <Route path="/sign-in" component={SignIn} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/confirmation" component={requireLogin(Confirmation)} />
         </Route>
     </Router>
 ), document.getElementById('app'));

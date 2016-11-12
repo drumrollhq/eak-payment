@@ -1,10 +1,9 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 
 import api from '../lib/api';
 
 import ErrorMessage from './ErrorMessage';
-import Link from './Link';
 import LoadingIndicator from './LoadingIndicator';
 import SSOButton from './SSOButton';
 
@@ -49,7 +48,7 @@ export default class SignIn extends React.Component {
     return (
       <div className="login">
         <LoadingIndicator loading={loading}>
-          <p>No account? <Link href="/sign-up">Sign up here</Link>.</p>
+          <p>No account? <Link to="/sign-up">Sign up here</Link>.</p>
           <SSOButton provider="google" onSignIn={this.handleComplete}>Sign in with google</SSOButton>
           <SSOButton provider="facebook" onSignIn={this.handleComplete}>Sign in with facebook</SSOButton>
           <hr />

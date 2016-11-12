@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import api from '../lib/api';
 
@@ -34,13 +35,17 @@ export default class PaymentForm extends React.Component {
         .buy(payload)
         .then(() => {
           this.setState({ loading: false });
-          alert('yay, the game is purchased');
+          this.handleCompleted();
         })
         .catch(e => {
           this.setState({ loading: false, error: e });
         });
     }
   };
+
+  handleCompleted() {
+    browserHistory.push('/confirmation');
+  }
 
   render() {
     const { loading, error } = this.state;
