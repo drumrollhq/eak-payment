@@ -30,6 +30,7 @@ const common = {
                 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
             ],
             scripts: [
+                'https://cdn.polyfill.io/v2/polyfill.min.js?features=default,es6,fetch',
                 'https://code.jquery.com/jquery-3.1.1.min.js',
                 'https://js.stripe.com/v2/'
             ]
@@ -83,7 +84,7 @@ switch(process.env.npm_lifecycle_event)
             sass(PATHS.app),
             devServer({
                 host: process.env.HOST || 'localhost',
-                port: process.env.PORT || 8000
+                port: process.env.PORT || 3000
             })
         );
 }
