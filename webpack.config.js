@@ -84,7 +84,7 @@ switch(process.env.npm_lifecycle_event)
             sass(PATHS.app),
             devServer({
                 host: process.env.HOST || 'localhost',
-                port: process.env.PORT || 3000
+                port: process.env.PORT || 8000
             })
         );
 }

@@ -7,7 +7,8 @@ import UserForm from './components/user-form';
 import RegisterForm from './components/register-form';
 import OptionsForm from './components/options-form';
 import ReferralsForm from './components/referrals-form';
-import Login from './components/Login';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 render((
     <Router history={browserHistory}>
@@ -16,7 +17,8 @@ render((
             <Route path="/buy" component={UserForm}/>
             <Route path="/options" component={OptionsForm}/>
             <Route path="/referrals" component={ReferralsForm}/>
-            <Route path="/sign-in" component={Login} />
+            <Route path="/sign-in" component={SignIn} />
+            <Route path="/sign-up" component={SignUp} />
         </Route>
     </Router>
 ), document.getElementById('app'));

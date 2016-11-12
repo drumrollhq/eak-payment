@@ -27,6 +27,7 @@ export default class SSOButton extends React.Component {
     this.ssoWindow = null;
 
     window.focus();
+    api.ssoCallback(data);
     this.props.onSignIn(data);
   }
 

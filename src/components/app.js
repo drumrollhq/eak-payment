@@ -12,7 +12,10 @@ export default class App extends React.Component {
   }
 
   state = {
-    user: {},
+    user: {
+      loggedIn: false,
+      user: null,
+    },
     ready: false,
   }
 
@@ -24,16 +27,20 @@ export default class App extends React.Component {
     api.on('user', this.handleNewUser);
   }
 
+  getChildContext() {
+    const { user = null, loggedIn = false } = this.state.user;
+    return { user, loggedIn };
+  }
+
   componentWillUnmount() {
     api.removeEventListener('user', this.handleNewUser);
   }
 
   handleNewUser = user => this.setState({ user, ready: true });
 
-  getChildContext() {
-    const { user = null, loggedIn = false } = this.state.user;
-    return { user, loggedIn };
-  }
+  handleSignOut = () => {
+    api.logout();
+  };
 
     render () {
         return (
@@ -45,8 +52,9 @@ export default class App extends React.Component {
                 </div>
 
                 <div className="row">
-                  <h4>Current user:</h4>
-                  <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
+                  <h4>Current user</h4>
+                  {this.state.user.loggedIn && <button onClick={this.handleSignOut}>Sign Out</button>}
+                  <pre>{JSON.stringify(this.getChildContext(), null, 2)}</pre>
                 </div>
             </div>
         );

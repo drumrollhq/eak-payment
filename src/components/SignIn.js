@@ -1,13 +1,13 @@
 import React from 'react';
 import api from '../lib/api';
 
+import ErrorMessage from './ErrorMessage';
 import LoadingIndicator from './LoadingIndicator';
 import SSOButton from './SSOButton';
-import ErrorMessage from './ErrorMessage';
 
 // Ported from https://github.com/drumrollhq/E.A.K./blob/master/app/scripts/ui/components/Login.ls
 
-export default class LoginForm extends React.Component {
+export default class SignIn extends React.Component {
   state = {
     username: '',
     password: '',
@@ -25,6 +25,7 @@ export default class LoginForm extends React.Component {
       .login(username, password)
       .then(() => {
         this.setState({ username: '', password: '', error: null, loading: false });
+        this.handleComplete();
       })
       .catch(e => {
         console.error(e);
@@ -35,8 +36,12 @@ export default class LoginForm extends React.Component {
   handleUsernameChange = e => this.setState({ username: e.target.value });
   handlePasswordChange = e => this.setState({ password: e.target.value });
 
-  handleSSO = data => {
-    console.log(data);
+  handleSSO = () => {
+    this.handleComplete();
+  }
+
+  handleComplete() {
+    alert('we\'re signed in, now what???');
   }
 
   render() {

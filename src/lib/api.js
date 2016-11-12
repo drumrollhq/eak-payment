@@ -22,7 +22,7 @@ class Hindquarters extends EventEmitter {
         response
           .json()
           .then(json => (response.status === 200 ? json : Promise.reject(json))))
-      .then(response => console.log(response) || response);
+      .then(response => console.log('[api]', method.toUpperCase(), url, response) || response);
   }
 
   _updateUser(user) {
@@ -47,6 +47,28 @@ class Hindquarters extends EventEmitter {
         return user;
       });
   }
+
+  logout() {
+    return this.fetch('get', 'v1/auth/logout')
+      .then(() => {
+        const user = { loggedIn: false, user: null };
+        this._updateUser(user);
+        return user;
+      });
+  }
+
+  ssoCallback(user) {
+    this._updateUser({ loggedIn: true, user });
+  }
+
+  register(newUser) {
+    return this.fetch('post', 'v1/auth/register', newUser)
+      .then(response => {
+        const user = { loggedIn: true, user: response };
+        this._updateUser(user);
+        return user;
+      });
+  }
 }
 
-export default new Hindquarters('https://api.eraseallkittens.com');
+export default new Hindquarters('http://localhost:3000');
