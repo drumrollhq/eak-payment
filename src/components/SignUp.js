@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import api from '../lib/api';
 
@@ -41,7 +42,7 @@ export default class SignUp extends React.Component {
   };
 
   handleComplete() {
-    alert('signed up! now what?');
+    browserHistory.push('/buy');
   }
 
   handleEmailChange = e => this.setState({ email: e.target.value });

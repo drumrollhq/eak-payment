@@ -1,4 +1,6 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
+
 import api from '../lib/api';
 
 import ErrorMessage from './ErrorMessage';
@@ -38,7 +40,7 @@ export default class SignIn extends React.Component {
   handlePasswordChange = e => this.setState({ password: e.target.value });
 
   handleComplete() {
-    alert('we\'re signed in, now what???');
+    browserHistory.push('/buy');
   }
 
   render() {

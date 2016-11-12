@@ -28,33 +28,24 @@ class Hindquarters extends EventEmitter {
   _updateUser(user) {
     this._currentUser = user;
     this.emit('user', user);
+    return user;
   }
 
   currentUser() {
     if (this._currentUser) return Promise.resolve(this._currentUser);
 
     return this.fetch('get', 'v1/users/me')
-      .then(user => {
-        this._updateUser(user);
-        return user;
-      });
+      .then(user => this._updateUser(user));
   }
 
   login(username, password) {
     return this.fetch('post', 'v1/auth/login', { username, password })
-      .then(user => {
-        this._updateUser(user);
-        return user;
-      });
+      .then(user => this._updateUser(user));
   }
 
   logout() {
     return this.fetch('get', 'v1/auth/logout')
-      .then(() => {
-        const user = { loggedIn: false, user: null };
-        this._updateUser(user);
-        return user;
-      });
+      .then(() => this._updateUser({ loggedIn: false, user: null }))
   }
 
   ssoCallback(user) {
@@ -63,11 +54,14 @@ class Hindquarters extends EventEmitter {
 
   register(newUser) {
     return this.fetch('post', 'v1/auth/register', newUser)
-      .then(response => {
-        const user = { loggedIn: true, user: response };
-        this._updateUser(user);
-        return user;
-      });
+      .then(user => this._updateUser({ loggedIn: true, user }))
+  }
+
+  buy(payload) {
+    return this
+      .currentUser()
+      .then(({ user: { id } }) => this.fetch('post', `v1/users/${id}/buy`, payload))
+      .then(user => this._updateUser({ loggedIn: true, user }));
   }
 }
 
