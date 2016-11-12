@@ -40,10 +40,6 @@ export default class SignUp extends React.Component {
       });
   };
 
-  handleSSO = () => {
-    this.handleComplete();
-  }
-
   handleComplete() {
     alert('signed up! now what?');
   }
@@ -59,8 +55,8 @@ export default class SignUp extends React.Component {
       <div>
         <h1>Sign Up</h1>
         <h2>SSO:</h2>
-        <SSOButton provider="google" onSignIn={this.handleSSO}>Sign Up with Google</SSOButton>
-        <SSOButton provider="facebook" onSignIn={this.handleSSO}>Sign Up with Facebook</SSOButton>
+        <SSOButton provider="google" onSignIn={this.handleComplete}>Sign Up with Google</SSOButton>
+        <SSOButton provider="facebook" onSignIn={this.handleComplete}>Sign Up with Facebook</SSOButton>
 
         <hr />
 

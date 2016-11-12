@@ -2,6 +2,7 @@ import React from 'react';
 import api from '../lib/api';
 
 import ErrorMessage from './ErrorMessage';
+import Link from './Link';
 import LoadingIndicator from './LoadingIndicator';
 import SSOButton from './SSOButton';
 
@@ -36,10 +37,6 @@ export default class SignIn extends React.Component {
   handleUsernameChange = e => this.setState({ username: e.target.value });
   handlePasswordChange = e => this.setState({ password: e.target.value });
 
-  handleSSO = () => {
-    this.handleComplete();
-  }
-
   handleComplete() {
     alert('we\'re signed in, now what???');
   }
@@ -50,9 +47,9 @@ export default class SignIn extends React.Component {
     return (
       <div className="login">
         <LoadingIndicator loading={loading}>
-          <p>No account? <a href="/sign-up">Sign up here</a>.</p>
-          <SSOButton provider="google" onSignIn={this.handleSSO}>Sign in with google</SSOButton>
-          <SSOButton provider="facebook" onSignIn={this.handleSSO}>Sign in with facebook</SSOButton>
+          <p>No account? <Link href="/sign-up">Sign up here</Link>.</p>
+          <SSOButton provider="google" onSignIn={this.handleComplete}>Sign in with google</SSOButton>
+          <SSOButton provider="facebook" onSignIn={this.handleComplete}>Sign in with facebook</SSOButton>
           <hr />
           <form onSubmit={this.handleSubmit}>
             <ErrorMessage error={error} />
