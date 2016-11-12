@@ -31,7 +31,6 @@ const common = {
             ],
             scripts: [
                 'https://cdn.polyfill.io/v2/polyfill.min.js?features=default,es6,fetch',
-                'https://code.jquery.com/jquery-3.1.1.min.js',
                 'https://js.stripe.com/v2/'
             ]
         })
