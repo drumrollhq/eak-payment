@@ -30,7 +30,7 @@ const common = {
                 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
             ],
             scripts: [
-                'https://code.jquery.com/jquery-3.1.1.min.js',
+                'https://cdn.polyfill.io/v2/polyfill.min.js?features=default,es6,fetch',
                 'https://js.stripe.com/v2/'
             ]
         })
