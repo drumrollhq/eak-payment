@@ -1,25 +1,29 @@
 import React from 'react';
 
-import { browserHistory } from 'react-router';
+import {browserHistory} from 'react-router';
 
 export default (Component) => class extends React.Component {
-  static contextTypes = {
-    loggedIn: React.PropTypes.bool.isRequired,
-  };
 
-  componentWillMount() {
-    this.checkLoggedIn(this.context);
-  }
+    static contextTypes = {
+        loggedIn: React.PropTypes.bool.isRequired,
+        user    : React.PropTypes.object.isRequired,
+    };
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    this.checkLoggedIn(nextContext);
-  }
+    componentWillMount() {
+        this.checkLoggedIn(this.context);
+    }
 
-  checkLoggedIn(context) {
-    if (!context.loggedIn) browserHistory.push('/sign-in');
-  }
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.checkLoggedIn(nextContext);
+    }
 
-  render() {
-    return <Component {...this.props} />;
-  }
+    checkLoggedIn(context) {
+        if (!context.loggedIn) {
+            browserHistory.push('/sign-in')
+        }
+    }
+
+    render() {
+        return <Component {...this.props} />;
+    }
 };

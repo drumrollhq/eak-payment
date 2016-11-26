@@ -6,55 +6,55 @@ import api from '../lib/api';
 import LoadingIndicator from './LoadingIndicator';
 
 export default class App extends React.Component {
-  static childContextTypes = {
-    user: React.PropTypes.object,
-    loggedIn: React.PropTypes.bool,
-  }
 
-  state = {
-    user: {
-      loggedIn: false,
-      user: null,
-    },
-    ready: false,
-  }
+    static childContextTypes = {
+        user    : React.PropTypes.object,
+        loggedIn: React.PropTypes.bool,
+    };
 
-  componentDidMount() {
-    api
-      .currentUser()
-      .then(this.handleNewUser);
+    state = {
+        user : {
+            loggedIn: false,
+            user    : null,
+        },
+        ready: false,
+    };
 
-    api.on('user', this.handleNewUser);
-  }
+    componentDidMount() {
+        api
+            .currentUser()
+            .then(this.handleNewUser);
 
-  getChildContext() {
-    const { user = null, loggedIn = false } = this.state.user;
-    return { user, loggedIn };
-  }
+        api.on('user', this.handleNewUser);
+    }
 
-  componentWillUnmount() {
-    api.removeEventListener('user', this.handleNewUser);
-  }
+    getChildContext() {
+        const {user = null, loggedIn = false} = this.state.user;
+        return {user, loggedIn};
+    }
 
-  handleNewUser = user => this.setState({ user, ready: true });
+    componentWillUnmount() {
+        api.removeEventListener('user', this.handleNewUser);
+    }
 
-  handleSignOut = () => {
-    api.logout();
-  };
+    handleNewUser = user => this.setState({user, ready: true});
 
-    render () {
+    handleSignOut = () => {
+        api.logout();
+    };
+
+    render() {
         return (
             <div className="container-fluid">
                 <div className="row">
-                  <LoadingIndicator loading={!this.state.ready}>
-                    {this.props.children}
-                  </LoadingIndicator>
+                    <LoadingIndicator loading={!this.state.ready}>
+                        {this.props.children}
+                    </LoadingIndicator>
                 </div>
 
                 <div className="row">
-                  <h4>Current user</h4>
-                  {this.state.user.loggedIn && <button onClick={this.handleSignOut}>Sign Out</button>}
-                  <pre>{JSON.stringify(this.getChildContext(), null, 2)}</pre>
+                    <h4>Current user</h4>
+                    {this.state.user.loggedIn && <button onClick={this.handleSignOut}>Sign Out</button>}
                 </div>
             </div>
         );

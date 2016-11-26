@@ -6,8 +6,7 @@ import requireLogin from './lib/requireLogin';
 
 import App from './components/app';
 
-import UserForm from './components/user-form';
-import RegisterForm from './components/register-form';
+import UserForm from './components/UserForm';
 import OptionsForm from './components/options-form';
 import ReferralsForm from './components/referrals-form';
 import SignIn from './components/SignIn';
@@ -16,14 +15,21 @@ import Confirmation from './components/Confirmation';
 
 render((
     <Router history={browserHistory}>
-        <Route path="/" component={App}>
-            <IndexRoute component={RegisterForm} />
-            <Route path="/buy" component={requireLogin(UserForm)}/>
-            <Route path="/options" component={OptionsForm}/>
-            <Route path="/referrals" component={ReferralsForm}/>
-            <Route path="/sign-in" component={SignIn} />
-            <Route path="/sign-up" component={SignUp} />
-            <Route path="/confirmation" component={requireLogin(Confirmation)} />
+        <Route path="/"
+               component={App}>
+            <IndexRoute component={requireLogin(UserForm)}/>
+            <Route path="/buy"
+                   component={requireLogin(UserForm)}/>
+            <Route path="/options"
+                   component={OptionsForm}/>
+            <Route path="/referrals"
+                   component={ReferralsForm}/>
+            <Route path="/sign-in"
+                   component={SignIn}/>
+            <Route path="/sign-up"
+                   component={SignUp}/>
+            <Route path="/confirmation"
+                   component={requireLogin(Confirmation)}/>
         </Route>
     </Router>
 ), document.getElementById('app'));
