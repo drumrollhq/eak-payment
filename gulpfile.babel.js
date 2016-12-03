@@ -35,6 +35,7 @@ Gulp.task('build', (done) => {
 
 Gulp.task('serve', function () {
     return BrowserSync({
+        browser: "google chrome",
         server: {
             baseDir   : App.paths.build.dist,
             middleware: [
