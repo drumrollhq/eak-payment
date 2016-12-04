@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+import {browserHistory} from 'react-router';
 
 import api from '../lib/api';
 
@@ -10,87 +10,109 @@ import SSOButton from './SSOButton';
 // Adapted from https://github.com/drumrollhq/E.A.K./blob/master/app/scripts/ui/components/SignUp.ls
 
 export default class SignUp extends React.Component {
-  state = {
-    loading: false,
-    error: null,
-    email: '',
-    password: '',
-    over13: null,
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    // todo: some validation
-    const newUser = {
-      email: this.state.email,
-      password: this.state.password,
-      assumeAdult: this.state.over13,
+    state = {
+        loading : false,
+        error   : null,
+        email   : '',
+        password: '',
+        over13  : false,
     };
 
-    this.setState({ error: null, loading: true, password: '' });
-    api
-      .register(newUser)
-      .then(() => {
-        this.setState({ loading: false, error: null });
-        this.handleComplete()
-      })
-      .catch(e => {
-        console.error(e);
-        this.setState({ loading: false, error: e });
-      });
-  };
+    handleSubmit = (e) => {
+        e.preventDefault();
 
-  handleComplete() {
-    browserHistory.push('/buy');
-  }
+        // todo: some validation
+        const newUser = {
+            email      : this.state.email,
+            password   : this.state.password,
+            assumeAdult: this.state.over13,
+        };
 
-  handleEmailChange = e => this.setState({ email: e.target.value });
-  handlePasswordChange = e => this.setState({ password: e.target.value });
-  handleOver13Change = e => this.setState({ over13: e.target.value });
+        this.setState({error: null, loading: true, password: ''});
+        api
+            .register(newUser)
+            .then(() => {
+                this.setState({loading: false, error: null});
+                this.handleComplete()
+            })
+            .catch(e => {
+                console.error(e);
+                this.setState({loading: false, error: e});
+            });
+    };
 
-  render() {
-    const { error, loading, email, password, over13 } = this.state;
+    handleComplete() {
+        browserHistory.push('/buy');
+    }
 
-    return (
-      <div>
-        <h1>Sign Up</h1>
-        <h2>SSO:</h2>
-        <SSOButton provider="google" onSignIn={this.handleComplete}>Sign Up with Google</SSOButton>
-        <SSOButton provider="facebook" onSignIn={this.handleComplete}>Sign Up with Facebook</SSOButton>
+    handleEmailChange    = e => this.setState({email: e.target.value});
+    handlePasswordChange = e => this.setState({password: e.target.value});
+    handleOver13Change   = e => {
+        this.setState({over13: !this.state.over13})
+    };
 
-        <hr />
+    handleBackButton = (event) => {
+        event.preventDefault();
+        browserHistory.push('/');
+    };
 
-        <LoadingIndicator loading={loading}>
-          <form onSubmit={this.handleSubmit}>
-            <ErrorMessage error={error} />
+    render() {
+        const {error, loading, email, password, over13} = this.state;
 
-            <label>
-              Email / parents email
-              <input type="text" onChange={this.handleEmailChange} value={email} />
-            </label>
+        return (
+            <div className="SignUp">
+                <h2>Sign Up</h2>
 
-            <label>
-              Password
-              <input type="password" onChange={this.handlePasswordChange} value={password} />
-            </label>
+                <SSOButton provider="google"
+                           onSignIn={this.handleComplete}>Sign Up with Google</SSOButton>
+                <SSOButton provider="facebook"
+                           onSignIn={this.handleComplete}>Sign Up with Facebook</SSOButton>
 
-            <div>
-              Over 13?
-              <label>
-                <input type="radio" checked={over13 === 'true'} value="true" onChange={this.handleOver13Change} />
-                Yep
-              </label>
-              <label>
-                <input type="radio" checked={over13 === 'false'} value="false" onChange={this.handleOver13Change} />
-                Nope
-              </label>
+                <LoadingIndicator loading={loading}>
+                    <form onSubmit={this.handleSubmit}>
+
+                        <ErrorMessage error={error}/>
+
+                        <div className="form-group">
+                            <label>Email</label>
+                                <input type="text"
+                                       onChange={this.handleEmailChange}
+                                       value={email}
+                                       className="form-control"/>
+
+                        </div>
+
+                        <div className="form-group">
+                            <label>
+                                Password
+                            </label>
+                                <input type="password"
+                                       onChange={this.handlePasswordChange}
+                                       value={password}
+                                       className="form-control"/>
+
+                        </div>
+
+                        <div className="checkbox">
+                            <label>
+                                <input type="checkbox"
+                                       value={this.state.over13}
+                                       checked={over13 === true}
+                                       onChange={this.handleOver13Change}/> Check this box if you are 13 or older
+                            </label>
+                        </div>
+
+                        <button className="btn"
+                                onClick={(event) => {
+                                    this.handleBackButton(event)
+                                }}>Back
+                        </button>
+                        <button type="submit"
+                                className="btn btn-primary">Submit
+                        </button>
+                    </form>
+                </LoadingIndicator>
             </div>
-
-            <button type="submit">Submit</button>
-          </form>
-        </LoadingIndicator>
-      </div>
-    );
-  }
+        );
+    }
 }

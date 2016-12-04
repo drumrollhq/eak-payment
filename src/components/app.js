@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './app.scss';
-
 import api from '../lib/api';
 import LoadingIndicator from './LoadingIndicator';
 
@@ -10,6 +8,7 @@ export default class App extends React.Component {
     static childContextTypes = {
         user    : React.PropTypes.object,
         loggedIn: React.PropTypes.bool,
+        handleSignOut: React.PropTypes.func
     };
 
     state = {
@@ -29,8 +28,15 @@ export default class App extends React.Component {
     }
 
     getChildContext() {
-        const {user = null, loggedIn = false} = this.state.user;
-        return {user, loggedIn};
+
+        const {user, loggedIn} = this.state.user;
+
+        return {
+            user,
+            loggedIn,
+            handleSignOut: this.handleSignOut
+
+        };
     }
 
     componentWillUnmount() {
@@ -39,7 +45,8 @@ export default class App extends React.Component {
 
     handleNewUser = user => this.setState({user, ready: true});
 
-    handleSignOut = () => {
+    handleSignOut = (event) => {
+        event.preventDefault();
         api.logout();
     };
 
@@ -50,11 +57,6 @@ export default class App extends React.Component {
                     <LoadingIndicator loading={!this.state.ready}>
                         {this.props.children}
                     </LoadingIndicator>
-                </div>
-
-                <div className="row">
-                    <h4>Current user</h4>
-                    {this.state.user.loggedIn && <button onClick={this.handleSignOut}>Sign Out</button>}
                 </div>
             </div>
         );

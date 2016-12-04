@@ -39,12 +39,12 @@ export default class SSOButton extends React.Component {
     } else if (this.ssoWindow) {
       this.ssoWindow.focus();
     }
-  }
+  };
 
   render() {
     const { provider, children } = this.props;
     return (
-      <button className={`sso-button sso-button-${provider}`} onClick={this.handleClick}>
+      <button className={`btn btn-lg btn-block btn-${provider}`} onClick={this.handleClick}>
         {children}
       </button>
     );

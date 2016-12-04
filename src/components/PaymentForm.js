@@ -9,26 +9,41 @@ import ErrorMessage from './ErrorMessage';
 export default class PaymentForm extends React.Component {
 
     static contextTypes = {
-        loggedIn: React.PropTypes.bool.isRequired,
-        user    : React.PropTypes.object.isRequired,
+        loggedIn     : React.PropTypes.bool.isRequired,
+        user         : React.PropTypes.object.isRequired,
+        handleSignOut: React.PropTypes.func.isRequired
     };
 
     state = {
-        loading: false,
-        error  : null,
+        loading   : false,
+        error     : null,
+        cardNumber: '',
+        expMonth  : '',
+        expYear   : '',
+        cvc       : '',
+        postcode  : ''
     };
 
     componentWillMount() {
+        console.log(this.context);
         if (this.context.loggedIn && this.context.user.purchased) {
             browserHistory.push('/confirmation');
         }
     }
 
     handleSubmit = (e) => {
+
         e.preventDefault();
 
         this.setState({error: null, loading: true});
-        Stripe.card.createToken(e.target, this.handleStripeResponse);
+        Stripe.card.createToken({
+            number: this.state.cardNumber,
+            cvc: this.state.cvc,
+            exp_month: this.state.expMonth,
+            exp_year: this.state.expYear,
+            address_zip: this.state.postcode,
+            address_country: 'GB'
+        }, this.handleStripeResponse);
     };
 
     handleStripeResponse = (status, response) => {
@@ -59,68 +74,85 @@ export default class PaymentForm extends React.Component {
         browserHistory.push('/confirmation');
     }
 
+    handleCardNumber = (event) => {
+        this.setState({cardNumber: event.target.value});
+    };
+
+    handleExpMonth = (event) => {
+        this.setState({expMonth: event.target.value});
+    };
+
+    handleExpYear = (event) => {
+        this.setState({expYear: event.target.value});
+    };
+
+    handleCvc = (event) => {
+        this.setState({cvc: event.target.value});
+    };
+
+    handlePostcode = (event) => {
+        this.setState({postcode: event.target.value});
+    };
+
     render() {
         const {loading, error} = this.state;
         return (
-            <LoadingIndicator loading={loading}>
-                <form onSubmit={this.handleSubmit}>
-                    <ErrorMessage error={error}/>
+            <div className="PaymentForm">
+                <h2>Payment details</h2>
+                <LoadingIndicator loading={loading}>
+                    <form onSubmit={this.handleSubmit}>
 
-                    <div className="form-group">
-                        <label>Card Number</label>
-                        <input type="text"
-                               className="form-control"
-                               data-stripe="number"
-                               placeholder="4242 4242 4242 4242"/>
-                    </div>
+                        <ErrorMessage error={error}/>
 
-                    <div className="form-group">
-                        <label>Expiration (MM/YY)</label>
-                        <div className="input-group">
+                        <div className="form-group">
+                            <label>Card Number</label>
                             <input type="text"
                                    className="form-control"
-                                   data-stripe="exp_month"
-                                   placeholder="09"/>
-                            <div className="input-group-addon">/</div>
-                            <input type="text"
-                                   className="form-control"
-                                   data-stripe="exp_year"
-                                   placeholder="19"/>
+                                   value={this.state.cardNumber}
+                                   onChange={this.handleCardNumber}/>
                         </div>
-                    </div>
 
-                    <div className="form-group">
-                        <label>CVC</label>
-                        <input type="text"
-                               className="form-control"
-                               data-stripe="cvc"
-                               placeholder="123"/>
-                    </div>
+                        <div className="form-group">
+                            <label>Expiration (MM/YY)</label>
+                            <div className="input-group">
+                                <input type="text"
+                                       className="form-control"
+                                       value={this.state.expMonth}
+                                       onChange={this.handleExpMonth}/>
+                                <div className="input-group-addon">/</div>
+                                <input type="text"
+                                       className="form-control"
+                                       value={this.state.expYear}
+                                       onChange={this.handleExpYear}/>
+                            </div>
+                        </div>
 
-                    <div className="form-group">
-                        <label>
-                            Country. Probably make this a dropdown or something i guess.
-                            We need to collect this for tax reasons as far as i remember
-                        </label>
-                        <input type="text"
-                               className="form-control"
-                               data-stripe="address_country"
-                               defaultValue="GB"/>
-                    </div>
+                        <div className="form-group">
+                            <label>CVC</label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.cvc}
+                                   onChange={this.handleCvc}/>
+                        </div>
 
-                    <div className="checkbox">
-                        <label>Postcode</label>
-                        <input type="text"
-                               className="form-control"
-                               data-stripe="address_zip"
-                               placeholder="12345"/>
-                    </div>
+                        <div className="form-group">
+                            <label>Postcode</label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.postcode}
+                                   onChange={this.handlePostcode}/>
+                        </div>
 
-                    <button type="submit"
-                            className="cta">Submit
-                    </button>
-                </form>
-            </LoadingIndicator>
+                        {this.context.loggedIn && <button onClick={(event) => {
+                            this.context.handleSignOut(event)
+                        }}
+                                                          className="btn">Sign Out</button>}
+                        <button type="submit"
+                                className="btn btn-primary">Buy Now
+                        </button>
+                    </form>
+                </LoadingIndicator>
+            </div>
         );
     }
 }

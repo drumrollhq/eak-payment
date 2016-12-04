@@ -1,34 +1,55 @@
+$btnBackground: #5e539e;
+$btnBorder: #36305b;
+
 body {
     background: inherit;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.container-fluid {
-    max-width: 960px;
+h1, h2, h3 {
+    font-family: 'KG Next to Me', 'Open Sans', sans-serif;
+    color: #443c72;
+    margin-bottom: 1em;
 }
 
-a {
-    cursor: pointer;
+form {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    button {
+        margin-top: 1em;
+    }
 }
 
-footer {
-    margin-top: 100px;
-    text-align: center;
+.btn {
+    margin-right: 10px;
 }
 
-.cta {
-    display: inline-block;
-    padding: 0.75em 1.5em;
-    margin: 2em auto;
-    text-decoration: none;
-    box-shadow: 0 0.4em 0 #7065ae;
-    background: #443c72;
-    border: none;
-    border-radius: 0.3em;
-    color: #fff !important;
-    font-family: 'KG Next To Me', 'Open Sans', sans-serif;
-    text-align: center;
-    line-height: 1.5em;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-    height: 3em;
+.btn-primary {
+    background: $btnBackground;
+    border-color: $btnBorder;
+    &:hover,
+    &:focus {
+        background: darken($btnBackground, 10%);
+        border-color: darken($btnBorder, 10%);
+    }
+}
+
+.btn-google {
+    background: #dd4b39;
+    color: #fff;
+    &:focus,
+    &:hover {
+        background: darken(#dd4b39, 10%);
+        color: #fff;
+    }
+}
+
+.btn-facebook {
+    background: #3b5998;
+    color: #fff;
+    &:focus,
+    &:hover {
+        background: darken(#3b5998, 10%);
+        color: #fff;
+    }
 }

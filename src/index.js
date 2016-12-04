@@ -7,8 +7,6 @@ import requireLogin from './lib/requireLogin';
 import App from './components/app';
 
 import UserForm from './components/UserForm';
-import OptionsForm from './components/options-form';
-import ReferralsForm from './components/referrals-form';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Confirmation from './components/Confirmation';
@@ -20,10 +18,6 @@ render((
             <IndexRoute component={requireLogin(UserForm)}/>
             <Route path="/buy"
                    component={requireLogin(UserForm)}/>
-            <Route path="/options"
-                   component={OptionsForm}/>
-            <Route path="/referrals"
-                   component={ReferralsForm}/>
             <Route path="/sign-in"
                    component={SignIn}/>
             <Route path="/sign-up"
