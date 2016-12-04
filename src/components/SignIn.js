@@ -48,6 +48,8 @@ export default class SignIn extends React.Component {
         return (
             <div className="SignIn">
                 <h2>Buy Now</h2>
+                <p>Erase All Kittens is the first learning tool that gives children aged 8+ knowledge of professional coding languages - helping to effectively prepare them for 21st Century degrees and careers.</p>
+                <p>E.A.K. currently teaches HTML syntax, and once purchased, will be updated regularly.</p>
                 <LoadingIndicator loading={loading}>
                     <p>No account? <Link to="/sign-up">Sign up here</Link>.</p>
                     <SSOButton provider="google" onSignIn={this.handleComplete}>Sign in with google</SSOButton>
