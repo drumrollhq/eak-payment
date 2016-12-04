@@ -53,3 +53,13 @@ form {
         color: #fff;
     }
 }
+
+.btn-twitter {
+    background: #55acee;
+    color: #fff;
+    &:focus,
+    &:hover {
+        background: darken(#55acee, 10%);
+        color: #fff;
+    }
+}

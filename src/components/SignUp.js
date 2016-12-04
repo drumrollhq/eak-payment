@@ -102,13 +102,15 @@ export default class SignUp extends React.Component {
                             </label>
                         </div>
 
+
+                        <button type="submit"
+                                className="btn btn-primary">Register
+                        </button>
+
                         <button className="btn"
                                 onClick={(event) => {
                                     this.handleBackButton(event)
-                                }}>Back
-                        </button>
-                        <button type="submit"
-                                className="btn btn-primary">Submit
+                                }}>Cancel
                         </button>
                     </form>
                 </LoadingIndicator>

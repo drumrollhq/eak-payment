@@ -143,13 +143,14 @@ export default class PaymentForm extends React.Component {
                                    onChange={this.handlePostcode}/>
                         </div>
 
+                        <button type="submit"
+                                className="btn btn-primary">Buy Now
+                        </button>
+
                         {this.context.loggedIn && <button onClick={(event) => {
                             this.context.handleSignOut(event)
                         }}
                                                           className="btn">Sign Out</button>}
-                        <button type="submit"
-                                className="btn btn-primary">Buy Now
-                        </button>
                     </form>
                 </LoadingIndicator>
             </div>
