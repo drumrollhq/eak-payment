@@ -25,7 +25,6 @@ export default class PaymentForm extends React.Component {
     };
 
     componentWillMount() {
-        console.log(this.context);
         if (this.context.loggedIn && this.context.user.purchased) {
             browserHistory.push('/confirmation');
         }

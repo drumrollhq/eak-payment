@@ -21,8 +21,7 @@ class Hindquarters extends EventEmitter {
       .then(response =>
         response
           .json()
-          .then(json => (response.status === 200 ? json : Promise.reject(json))))
-      .then(response => console.log('[api]', method.toUpperCase(), url, response) || response);
+          .then(json => (response.status === 200 ? json : Promise.reject(json))));
   }
 
   _updateUser(user) {
