@@ -57,5 +57,8 @@
       "js": "./build/dist/js",
       "dist": "./build/dist"
     }
+  },
+  "engines": {
+    "node" : "6.9.1"
   }
 }
