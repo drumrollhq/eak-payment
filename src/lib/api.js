@@ -1,10 +1,20 @@
 import EventEmitter from 'events';
 
-class Hindquarters extends EventEmitter {
-  constructor(root) {
-    super();
-    this.root = root;
-  }
+class Hindquarters extends EventEmitter
+{
+    constructor(root)
+    {
+        super();
+
+        switch (process.env.NODE_ENV) {
+            case 'production':
+                this.root = 'http://api.eraseallkittens.com';
+                break;
+            default:
+                this.root = 'http://localhost:3000';
+                break;
+        }
+    }
 
   fetch(method, url, body) {
     const options = {
@@ -64,4 +74,4 @@ class Hindquarters extends EventEmitter {
   }
 }
 
-export default new Hindquarters('http://localhost:3000');
+export default new Hindquarters();
