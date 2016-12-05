@@ -9,7 +9,7 @@
     "heroku-postbuild": "npm run build",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "gulp watch",
-    "start:prod": "npm run build && node server.js"
+    "start:prod": "node server.js"
   },
   "keywords": [],
   "author": "",
