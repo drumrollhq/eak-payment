@@ -1,3 +1,4 @@
+import 'localenv';
 import App from './package.json';
 import Gulp from 'gulp';
 import Del from 'del';

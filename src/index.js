@@ -28,4 +28,4 @@ render((
     </Router>
 ), document.getElementById('app'));
 
-Stripe.setPublishableKey('pk_test_e3mLdEPNTPqXmMSNi2DkOKBA');
+Stripe.setPublishableKey(process.env.STRIPE_PUBLIC_KEY);
