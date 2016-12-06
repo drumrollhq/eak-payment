@@ -50,7 +50,7 @@ Gulp.task('sass', function () {
         .pipe(SourceMaps.init())
         .pipe(Sass())
         .pipe(Concat('app.css'))
-        .pipe(SourceMaps.write('.'))
+        .pipe(SourceMaps.write())
         .pipe(Gulp.dest(App.paths.build.css));
 });
 
