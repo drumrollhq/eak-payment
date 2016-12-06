@@ -66,6 +66,7 @@ Gulp.task('sass:min', function () {
 Gulp.task('js', function () {
     return Browserify(App.paths.app)
         .transform('babelify', {presets: ["es2015", "react", "stage-2"]})
+        .transform(Envify)
         .bundle()
         .pipe(Source(App.paths.app))
         .pipe(Buffer())
