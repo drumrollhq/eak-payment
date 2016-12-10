@@ -15,7 +15,7 @@ export default class Confirmation extends React.Component {
                     <h2>Thanks for purchasing Erase All Kittens!</h2>
 
                     <p><a className="btn btn-facebook"
-                       href="https://eraseallkittens.com/en/play">
+                       href="https://eraseallkittens.com/en/play" target="_blank">
                         Play E.A.K
                     </a></p>
 
