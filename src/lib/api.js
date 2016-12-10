@@ -6,14 +6,7 @@ class Hindquarters extends EventEmitter
     {
         super();
 
-        switch (process.env.NODE_ENV) {
-            case 'production':
-                this.root = 'http://api.eraseallkittens.com';
-                break;
-            default:
-                this.root = 'http://localhost:3000';
-                break;
-        }
+        this.root = process.env.EAK_API_URL;
     }
 
   fetch(method, url, body) {

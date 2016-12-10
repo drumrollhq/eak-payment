@@ -35,7 +35,7 @@ export default class SSOButton extends React.Component {
     const { provider } = this.props;
 
     if (!this.ssoWindow || this.ssoWindow.closed) {
-      this.ssoWindow = window.open(`${api.root}/v1/auth/${provider}/?redirect=/v1/auth/js-return`);
+      this.ssoWindow = window.open(`${api.root}/v1/auth/${provider}/?redirect=${process.env.EAK_OAUTH_RETURN}`);
     } else if (this.ssoWindow) {
       this.ssoWindow.focus();
     }
