@@ -98,6 +98,7 @@ export default class PaymentForm extends React.Component {
         return (
             <div className="PaymentForm">
                 <h2>Payment details</h2>
+                <p>You can purchase the first version of E.A.K. at a discounted price of just £4 - all you need to do is fill out the details below. New levels teaching HTML, CSS and Javascript will be added in 2017.</p>
                 <LoadingIndicator loading={loading}>
                     <form onSubmit={this.handleSubmit}>
 
