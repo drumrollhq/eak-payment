@@ -21,7 +21,7 @@ export default class PaymentForm extends React.Component {
         expMonth  : '',
         expYear   : '',
         cvc       : '',
-        postcode  : ''
+        country: 'GB'
     };
 
     componentWillMount() {
@@ -40,8 +40,7 @@ export default class PaymentForm extends React.Component {
             cvc: this.state.cvc,
             exp_month: this.state.expMonth,
             exp_year: this.state.expYear,
-            address_zip: this.state.postcode,
-            address_country: 'GB'
+            address_country: this.state.country
         }, this.handleStripeResponse);
     };
 
@@ -89,8 +88,8 @@ export default class PaymentForm extends React.Component {
         this.setState({cvc: event.target.value});
     };
 
-    handlePostcode = (event) => {
-        this.setState({postcode: event.target.value});
+    handleCountry = (event) => {
+        this.setState({country: event.target.value});
     };
 
     render() {
@@ -136,11 +135,13 @@ export default class PaymentForm extends React.Component {
                         </div>
 
                         <div className="form-group">
-                            <label>Postcode</label>
-                            <input type="text"
-                                   className="form-control"
-                                   value={this.state.postcode}
-                                   onChange={this.handlePostcode}/>
+                            <label>Country</label>
+                            <select className="form-control"
+                                    value={this.state.country}
+                                    onChange={this.handleCountry}>
+                                <option value="GB">UK</option>
+                                <option value="US">USA</option>
+                            </select>
                         </div>
 
                         <button type="submit"
