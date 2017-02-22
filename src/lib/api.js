@@ -65,6 +65,20 @@ class Hindquarters extends EventEmitter
       .then(({ user: { id } }) => this.fetch('post', `v1/users/${id}/buy`, payload))
       .then(user => this._updateUser({ loggedIn: true, user }));
   }
+
+  buyGift(payload){
+    return this
+      .currentUser()
+      .then(({ user: { id } }) => this.fetch('post', `v1/gift-codes`, payload))
+      .then(user => this._updateUser({ loggedIn: true, user }));
+  }
+
+  claimCode(payload){
+    return this
+      .currentUser()
+      .then(({ user: { id } }) => this.fetch('post', `v1/gift-codes/` + payload + `/claim`))
+      .then(user => this._updateUser({ loggedIn: true, user })); 
+  }
 }
 
 export default new Hindquarters();

@@ -39,7 +39,8 @@ export default class SignIn extends React.Component {
     handlePasswordChange = e => this.setState({password: e.target.value});
 
     handleComplete() {
-        browserHistory.push('/buy');
+        var queryString = this.props.location.query.code == null ? '' : '?code=' + this.props.location.query.code;
+        browserHistory.push(this.props.location.query.returnTo + queryString);
     }
 
     render() {

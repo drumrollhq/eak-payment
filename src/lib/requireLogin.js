@@ -19,7 +19,8 @@ export default (Component) => class extends React.Component {
 
     checkLoggedIn(context) {
         if (!context.loggedIn) {
-            browserHistory.push('/sign-in')
+            var queryString = this.props.location.query.code == null ? '' : '&code=' + this.props.location.query.code
+            browserHistory.push('/sign-in?returnTo=' + this.props.location.pathname + queryString);
         }
     }
 
